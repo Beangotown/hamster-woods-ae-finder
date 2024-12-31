@@ -9,6 +9,7 @@ public class ChancePurchasedProcessor : HamsterProcessorBase<ChancePurchased>
 {
     public override async Task ProcessAsync(ChancePurchased logEvent, LogEventContext context)
     {
+        BreakHelper.CheckBreak(context.Block.BlockHeight);
         var feeAmount = GetFeeAmount(context.Transaction.ExtraProperties);
         var index = new PurchaseChanceIndex
         {

@@ -9,6 +9,7 @@ public class PickedProcessor : HamsterProcessorBase<Picked>
 {
     public override async Task ProcessAsync(Picked logEvent, LogEventContext context)
     {
+        BreakHelper.CheckBreak(context.Block.BlockHeight);
         await SaveGameIndexAsync(logEvent, context, logEvent.WeekNum, logEvent.IsRace);
         await SaveRankWeekUserIndexAsync(logEvent, context, logEvent.WeekNum);
     }
